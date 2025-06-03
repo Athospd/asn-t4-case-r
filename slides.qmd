@@ -30,3 +30,17 @@ format: revealjs
 [Linkedin do Athos](https://www.linkedin.com/in/athosdamiani/)
 
 ![](athos.jpg)
+
+---
+
+<div style="display: flex; justify-content: center;">
+```{r}
+library(plotly)
+
+p <- iris |> 
+    ggplot(aes(x = Petal.Length, y = Sepal.Length)) +
+    geom_point(aes(colour = Species))
+
+ggplotly(p)
+```
+</div>
