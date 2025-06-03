@@ -5,6 +5,20 @@ date: today
 format: revealjs
 ---
 
+## Proposta
+
+Focar em tres maneiras de entregar produtos de dados: 
+
+- relatorios e slides 
+- modelos de ML e scores
+- APIs
+
+Se sobrar tempo: palhinha sobre dashboard interativo
+
+**PS1:** tentarei ser complementar ao Teo.
+
+**PS2:** PPT e Excel ainda reinam. 
+
 ## Agenda
 
 - Aulas 1 e 2: Setup Databricks, Relatorios e slides, Github Actions
