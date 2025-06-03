@@ -1,7 +1,9 @@
 ---
 title: "Relatorio Mensal"
 author: "Athos Petri Damiani"
-format: md
+format:
+  html: default
+  md: default
 date: today
 prefer-html: true
 ---
