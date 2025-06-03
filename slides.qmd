@@ -19,6 +19,16 @@ Se sobrar tempo: palhinha sobre dashboard interativo
 
 **PS2:** PPT e Excel ainda reinam. 
 
+---
+
+## Desafio
+
+O(A) cientista de dados quando vai para a "pratica", se depara com o mundo da Engenharia de Dados.
+
+E Engenharia de Dados eh dificil.
+
+---
+
 ## Agenda
 
 - Aulas 1 e 2: Setup Databricks, Relatorios e slides, Github Actions
@@ -33,7 +43,7 @@ Se sobrar tempo: palhinha sobre dashboard interativo
 - Sobre mim e sobre a gente
 - Databricks (Free Trial) na Azure
 - Databricks Connect (config)
-- Positron IDE
+- Positron IDE (opcional)
 - Documentos reprodutiveis com Quarto
 - Variaveis de Ambiente, Sys.getenv(), .Renviron, Var Env no Github
 - Github Actions
