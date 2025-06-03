@@ -13,11 +13,13 @@ Focar em tres maneiras de entregar produtos de dados:
 - modelos de ML e scores
 - APIs
 
+
 Se sobrar tempo: palhinha sobre dashboard interativo
 
 **PS1:** tentarei ser complementar ao Teo.
 
 **PS2:** PPT e Excel ainda reinam. 
+
 
 ---
 
