@@ -35,6 +35,7 @@ jobs:
 
       - name: Render README.qmd and Commit Results
         run: |
+          Rscript -e 'install.packages("rmarkdown")'
           quarto render README.qmd
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
