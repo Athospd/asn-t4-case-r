@@ -4,6 +4,7 @@ author: "Athos Petri Damiani"
 format:
   html: default
   md: default
+  pdf: default
 date: today
 prefer-html: true
 ---
