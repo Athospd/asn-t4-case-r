@@ -45,12 +45,14 @@ jobs:
 
       - name: Render README.qmd and Commit Results
         run: |
+          Rscript -e 'install.packages("webshot2", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("rmarkdown", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("tidyverse", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("sparklyr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("pysparklyr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("knitr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           Rscript -e 'install.packages("plotly", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'webshot2::install_phantomjs()'
           quarto render README.qmd
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
