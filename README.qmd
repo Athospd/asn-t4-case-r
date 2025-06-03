@@ -19,6 +19,10 @@ date: today
 ```
 
 ```{r}
+Sys.getenv("TESTE", "nao encontrou o env TESTE")
+```
+
+```{r}
 #| echo: false
 #| message: false
 #| warning: false
