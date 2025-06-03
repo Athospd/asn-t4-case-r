@@ -22,6 +22,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install libcurl4-openssl-dev
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -35,12 +37,12 @@ jobs:
 
       - name: Render README.qmd and Commit Results
         run: |
-          Rscript -e 'install.packages("rmarkdown")'
-          Rscript -e 'install.packages("tidyverse")'
-          Rscript -e 'install.packages("sparklyr")'
-          Rscript -e 'install.packages("pysparklyr")'
-          Rscript -e 'install.packages("knitr")'
-          Rscript -e 'install.packages("plotly")'
+          Rscript -e 'install.packages("rmarkdown", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'install.packages("tidyverse", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'install.packages("sparklyr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'install.packages("pysparklyr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'install.packages("knitr", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
+          Rscript -e 'install.packages("plotly", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"))'
           quarto render README.qmd
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"

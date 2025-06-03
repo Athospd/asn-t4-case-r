@@ -1,0 +1,18 @@
+---
+title: "Casos Praticos com R"
+author: "Athos Petri Damiani"
+date: today
+format: revealjs
+---
+
+## Agenda
+
+- Aulas 1 e 2: Setup Databricks, Relatorios e slides, Github Actions
+- Aula 3: ML no Databricks/MLflow usando o R
+- Aulas 4 e 5: APIs e Docker
+- Extra se sobrar tempo: um pouco sobre Shiny
+---
+
+## Intro
+
+Alo
