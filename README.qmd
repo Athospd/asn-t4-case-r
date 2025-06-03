@@ -1,0 +1,80 @@
+---
+title: "Relatorio Mensal"
+author: "Athos Petri Damiani"
+format: html
+date: today
+---
+
+```{r}
+#| echo: false
+
+# install.packages("tidyverse")
+# install.packages("sparklyr")
+# install.packages("pysparklyr")
+# install.packages("knitr")
+
+# usethis::edit_r_environ()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(sparklyr)
+library(tidyverse)
+library(plotly)
+library(knitr)
+
+sc <- spark_connect(method = "databricks_connect")
+```
+
+```{r}
+#| warning: false
+
+mtcars_from_local = mtcars |> rownames_to_column("car_id")
+
+mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
+
+spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
+```
+
+
+```{r}
+# mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
+mtcars_from_db <- tbl(sc, "mtcars_from_local")
+mtcars_from_db |> collect() |> reactable::reactable(wrap = FALSE)
+```
+
+
+```{r}
+collect(mtcars_from_db) |> 
+    ggplot(aes(x = disp, y = mpg))  +
+    geom_smooth(se = FALSE) +
+    geom_point(aes(colour = as.character(gear)))
+```
+
+
+```{r}
+mtcars_from_db |> 
+    group_by(gear) |> 
+    summarise(
+        across(starts_with("d"), mean),
+    ) |> 
+    kable()
+```
+
+
+```{r}
+#| warning: false
+#| 
+p <- lakers |> 
+    mutate(
+        date = as_date(as.character(date), format = "%Y%m%d")
+    ) |> 
+    ggplot(aes(x = date, y = points)) +
+    stat_summary() +
+    scale_x_date()
+
+ggplotly(p)
+```
