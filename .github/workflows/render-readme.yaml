@@ -40,6 +40,7 @@ jobs:
           Rscript -e 'install.packages("sparklyr")'
           Rscript -e 'install.packages("pysparklyr")'
           Rscript -e 'install.packages("knitr")'
+          Rscript -e 'install.packages("plotly")'
           quarto render README.qmd
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"

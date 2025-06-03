@@ -8,10 +8,12 @@ date: today
 ```{r}
 #| echo: false
 
+# install.packages("rmarkdown")
 # install.packages("tidyverse")
 # install.packages("sparklyr")
 # install.packages("pysparklyr")
 # install.packages("knitr")
+# install.packages("plotly")
 
 # usethis::edit_r_environ()
 ```
@@ -43,7 +45,7 @@ spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
 ```{r}
 # mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
 mtcars_from_db <- tbl(sc, "mtcars_from_local")
-mtcars_from_db |> collect() |> reactable::reactable(wrap = FALSE)
+mtcars_from_db |> head() |> kable()
 ```
 
 
