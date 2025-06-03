@@ -14,7 +14,7 @@ Focar em tres maneiras de entregar produtos de dados:
 - APIs
 
 
-Se sobrar tempo: palhinha sobre dashboard interativo
+Se sobrar tempo: um pouco sobre dashboard interativo
 
 **PS1:** tentarei ser complementar ao Teo.
 
