@@ -11,6 +11,7 @@ format: revealjs
 - Aula 3: ML no Databricks/MLflow usando o R
 - Aulas 4 e 5: APIs e Docker
 - Extra se sobrar tempo: um pouco sobre Shiny
+
 ---
 
 ## Intro
