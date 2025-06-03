@@ -14,6 +14,19 @@ format: revealjs
 
 ---
 
-## Intro
+## Hoje
 
-Alo
+- Sobre mim e sobre a gente
+- Databricks (Free Trial) na Azure
+- Databricks Connect (config)
+- Positron IDE
+- Documentos reprodutiveis com Quarto
+- Variaveis de Ambiente, Sys.getenv(), .Renviron, Var Env no Github
+- Github Actions
+
+---
+
+
+[Linkedin do Athos](https://www.linkedin.com/in/athosdamiani/)
+
+![](athos.jpg)
