@@ -222,6 +222,14 @@ p
 ![](README.markdown_strict_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 ``` python
+import sys
+
+print(f"Versão do Py: {sys.version}")
+```
+
+    Versão do Py: 3.12.11 (main, Jun  4 2025, 17:36:43) [Clang 20.1.4 ]
+
+``` python
 2+2
 ```
 
