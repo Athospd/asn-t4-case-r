@@ -1,6 +1,18 @@
 # Relatorio Mensal
 Athos Petri Damiani
-2025-06-03
+2025-06-05
+
+## Introducao
+
+Este documento contem:
+
+-   Demonstracao de markdown
+-   tabelas, graficos, e textos dinamicos
+-   chunks de codigo misturados com blocos de texto
+-   Demonstracao de que o Quarto pode ser usado tanto como notebook
+    quanto para gerar documentos apresentaveis
+
+## Exemplo de variaveis de ambiente e Sys.getenv()
 
 ``` r
 Sys.getenv("TESTE", "nao encontrou o env TESTE")
@@ -8,17 +20,14 @@ Sys.getenv("TESTE", "nao encontrou o env TESTE")
 
     [1] "Encontrou o ENV TESTE configurado no Settings do Github Actions do Repositorio"
 
-``` r
-mtcars_from_local = mtcars |> rownames_to_column("car_id")
+ola mundo
 
-mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
-
-spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
-```
+## Dados da analise
 
 ``` r
 # mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
-mtcars_from_db <- tbl(sc, "mtcars_from_local")
+# mtcars_from_db <- tbl(sc, "mtcars_from_local")
+mtcars_from_db <- mtcars
 mtcars_from_db |> head() |> kable()
 ```
 
@@ -39,7 +48,7 @@ mtcars_from_db |> head() |> kable()
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">car_id</th>
+<th style="text-align: left;"></th>
 <th style="text-align: right;">mpg</th>
 <th style="text-align: right;">cyl</th>
 <th style="text-align: right;">disp</th>
@@ -142,6 +151,16 @@ mtcars_from_db |> head() |> kable()
 </table>
 
 ``` r
+# collect(mtcars_from_db)
+```
+
+## Grafico de disp vs mpg
+
+Esta secao mostra um grafico de `disp` vs `mgp`.
+
+-   numero de linhas: 32
+
+``` r
 collect(mtcars_from_db) |> 
     ggplot(aes(x = disp, y = mpg))  +
     geom_smooth(se = FALSE) +
@@ -150,7 +169,7 @@ collect(mtcars_from_db) |>
 
     `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 
-![](README.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](README.markdown_strict_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 ``` r
 mtcars_from_db |> 
@@ -160,10 +179,6 @@ mtcars_from_db |>
     ) |> 
     kable()
 ```
-
-    Warning: Missing values are always removed in SQL aggregation functions.
-    Use `na.rm = TRUE` to silence this warning
-    This warning is displayed once every 8 hours.
 
 <table>
 <thead>
@@ -175,14 +190,14 @@ mtcars_from_db |>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">123.0167</td>
-<td style="text-align: right;">4.043333</td>
-</tr>
-<tr>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">326.3000</td>
 <td style="text-align: right;">3.132667</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">123.0167</td>
+<td style="text-align: right;">4.043333</td>
 </tr>
 <tr>
 <td style="text-align: right;">5</td>
@@ -204,4 +219,4 @@ p <- lakers |>
 p
 ```
 
-![](README.markdown_strict_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](README.markdown_strict_files/figure-markdown_strict/unnamed-chunk-9-1.png)
