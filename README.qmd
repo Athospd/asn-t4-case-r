@@ -4,6 +4,7 @@ author: "Athos Petri Damiani"
 format:
   html: default
   md: default
+  docx: default
 date: today
 prefer-html: true
 ---
@@ -12,12 +13,16 @@ prefer-html: true
 
 Este documento contem:
 
-- Demonstracao de markdown
-- tabelas, graficos, e textos dinamicos
-- chunks de codigo misturados com blocos de texto
-- Demonstracao de que o Quarto pode ser usado tanto como notebook quanto para gerar documentos apresentaveis
+-   Demonstracao de markdown
+-   tabelas, graficos, e textos dinamicos
+-   chunks de codigo misturados com blocos de texto
+-   Demonstracao de que o Quarto pode ser usado tanto como notebook quanto para gerar documentos apresentaveis
 
 ```{r}
+2
+```
+
+```{}
 #| echo: false
 
 # install.packages("rmarkdown")
@@ -51,7 +56,7 @@ library(knitr)
 # DATABRICKS_TOKEN=<personal-access-token>
 # DATABRICKS_CLUSTER_ID=<cluster-id>
 
-sc <- spark_connect(method = "databricks_connect")
+# sc <- spark_connect(method = "databricks_connect")
 ```
 
 ola mundo
@@ -76,7 +81,6 @@ mtcars_from_db <- mtcars
 mtcars_from_db |> head() |> kable()
 ```
 
-
 ```{r}
 # collect(mtcars_from_db)
 ```
@@ -85,7 +89,7 @@ mtcars_from_db |> head() |> kable()
 
 Esta secao mostra um grafico de `disp` vs `mgp`.
 
-- numero de linhas: `r nrow(mtcars_from_db)`
+-   numero de linhas: `r nrow(mtcars_from_db)`
 
 ```{r}
 collect(mtcars_from_db) |> 
@@ -94,20 +98,17 @@ collect(mtcars_from_db) |>
     geom_point(aes(colour = as.character(gear)))
 ```
 
-
 ```{r}
 mtcars_from_db |> 
     group_by(gear) |> 
     summarise(
         across(starts_with("d"), mean),
-    ) |> 
-    kable()
+    ) 
 ```
-
 
 ```{r}
 #| warning: false
-
+library(plotly)
 p <- lakers |> 
     mutate(
         date = as_date(as.character(date), format = "%Y%m%d")
@@ -116,9 +117,8 @@ p <- lakers |>
     stat_summary() +
     scale_x_date()
 
-p
+ggplotly(p)
 ```
-
 
 ```{python}
 import sys
@@ -129,3 +129,9 @@ print(f"Versão do Py: {sys.version}")
 ```{python}
 2+2
 ```
+
+
+```{python}
+r.iris
+```
+
