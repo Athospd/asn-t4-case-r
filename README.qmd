@@ -51,7 +51,7 @@ library(knitr)
 # DATABRICKS_TOKEN=<personal-access-token>
 # DATABRICKS_CLUSTER_ID=<cluster-id>
 
-# sc <- spark_connect(method = "databricks_connect")
+sc <- spark_connect(method = "databricks_connect")
 ```
 
 ola mundo
@@ -120,6 +120,11 @@ p
 ```
 
 
+```{python}
+import sys
+
+print(f"Versão do Py: {sys.version}")
+```
 
 ```{python}
 2+2
