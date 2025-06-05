@@ -9,6 +9,15 @@ date: today
 prefer-html: true
 ---
 
+## Introducao
+
+Este documento contem:
+
+- Demonstracao de markdown
+- tabelas, graficos, e textos dinamicos
+- chunks de codigo misturados com blocos de texto
+- Demonstracao de que o Quarto pode ser usado tanto como notebook quanto para gerar documentos apresentaveis
+
 ```{r}
 #| echo: false
 
@@ -22,6 +31,8 @@ prefer-html: true
 
 # usethis::edit_r_environ()
 ```
+
+## Exemplo de variaveis de ambiente e Sys.getenv()
 
 ```{r}
 Sys.getenv("TESTE", "nao encontrou o env TESTE")
@@ -37,26 +48,45 @@ library(tidyverse)
 library(plotly)
 library(knitr)
 
-sc <- spark_connect(method = "databricks_connect")
+# DATABRICKS_HOST=<workspace-url>
+# DATABRICKS_TOKEN=<personal-access-token>
+# DATABRICKS_CLUSTER_ID=<cluster-id>
+
+# sc <- spark_connect(method = "databricks_connect")
 ```
+
+ola mundo
 
 ```{r}
+#| echo: false
 #| warning: false
 
-mtcars_from_local = mtcars |> rownames_to_column("car_id")
+# mtcars_from_local = mtcars |> rownames_to_column("car_id")
 
-mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
+# mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
 
-spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
+# spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
 ```
 
+## Dados da analise
 
 ```{r}
 # mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
-mtcars_from_db <- tbl(sc, "mtcars_from_local")
+# mtcars_from_db <- tbl(sc, "mtcars_from_local")
+mtcars_from_db <- mtcars
 mtcars_from_db |> head() |> kable()
 ```
 
+
+```{r}
+# collect(mtcars_from_db)
+```
+
+## Grafico de disp vs mpg
+
+Esta secao mostra um grafico de `disp` vs `mgp`.
+
+- numero de linhas: `r nrow(mtcars_from_db)`
 
 ```{r}
 collect(mtcars_from_db) |> 
@@ -78,7 +108,7 @@ mtcars_from_db |>
 
 ```{r}
 #| warning: false
-#| 
+
 p <- lakers |> 
     mutate(
         date = as_date(as.character(date), format = "%Y%m%d")

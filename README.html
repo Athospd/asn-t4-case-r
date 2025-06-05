@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Athos Petri Damiani">
-<meta name="dcterms.date" content="2025-06-03">
+<meta name="dcterms.date" content="2025-06-05">
 
 <title>Relatorio Mensal</title>
 <style>
@@ -70,7 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="README_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="README_files/libs/bootstrap/bootstrap-e7aef54abf3c3b600baac4692255d8cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="README_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 3, 2025</p>
+      <p class="date">June 5, 2025</p>
     </div>
   </div>
   
@@ -113,23 +113,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="introducao" class="level2">
+<h2 class="anchored" data-anchor-id="introducao">Introducao</h2>
+<p>Este documento contem:</p>
+<ul>
+<li>Demonstracao de markdown</li>
+<li>tabelas, graficos, e textos dinamicos</li>
+<li>chunks de codigo misturados com blocos de texto</li>
+<li>Demonstracao de que o Quarto pode ser usado tanto como notebook quanto para gerar documentos apresentaveis</li>
+</ul>
+</section>
+<section id="exemplo-de-variaveis-de-ambiente-e-sys.getenv" class="level2">
+<h2 class="anchored" data-anchor-id="exemplo-de-variaveis-de-ambiente-e-sys.getenv">Exemplo de variaveis de ambiente e Sys.getenv()</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"TESTE"</span>, <span class="st">"nao encontrou o env TESTE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Encontrou o ENV TESTE configurado no Settings do Github Actions do Repositorio"</code></pre>
+<pre><code>[1] "nao encontrou o env TESTE"</code></pre>
 </div>
 </div>
+<p>ola mundo</p>
+</section>
+<section id="dados-da-analise" class="level2">
+<h2 class="anchored" data-anchor-id="dados-da-analise">Dados da analise</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars_from_local <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> <span class="fu">rownames_to_column</span>(<span class="st">"car_id"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mtcars_no_db <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(sc, mtcars_from_local, <span class="st">"mtcars_from_local"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spark_write_table</span>(mtcars_no_db, <span class="at">name =</span> <span class="st">"mtcars_from_local"</span>, <span class="at">mode =</span> <span class="st">"overwrite"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars_from_db &lt;- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mtcars_from_db <span class="ot">&lt;-</span> <span class="fu">tbl</span>(sc, <span class="st">"mtcars_from_local"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mtcars_from_db <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars_from_db &lt;- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars_from_db &lt;- tbl(sc, "mtcars_from_local")</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mtcars_from_db <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mtcars_from_db <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -148,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">car_id</th>
+<th style="text-align: left;"></th>
 <th style="text-align: right;">mpg</th>
 <th style="text-align: right;">cyl</th>
 <th style="text-align: right;">disp</th>
@@ -252,6 +262,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># collect(mtcars_from_db)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="grafico-de-disp-vs-mpg" class="level2">
+<h2 class="anchored" data-anchor-id="grafico-de-disp-vs-mpg">Grafico de disp vs mpg</h2>
+<p>Esta secao mostra um grafico de <code>disp</code> vs <code>mgp</code>.</p>
+<ul>
+<li>numero de linhas: 32</li>
+</ul>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collect</span>(mtcars_from_db) <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg))  <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
@@ -262,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="README_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -274,11 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"d"</span>), mean),</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Missing values are always removed in SQL aggregation functions.
-Use `na.rm = TRUE` to silence this warning
-This warning is displayed once every 8 hours.</code></pre>
-</div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -290,14 +305,14 @@ This warning is displayed once every 8 hours.</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">123.0167</td>
-<td style="text-align: right;">4.043333</td>
-</tr>
-<tr class="even">
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">326.3000</td>
 <td style="text-align: right;">3.132667</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">123.0167</td>
+<td style="text-align: right;">4.043333</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
@@ -309,23 +324,24 @@ This warning is displayed once every 8 hours.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">date =</span> <span class="fu">as_date</span>(<span class="fu">as.character</span>(date), <span class="at">format =</span> <span class="st">"%Y%m%d"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> points)) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>() <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_date</span>()</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">date =</span> <span class="fu">as_date</span>(<span class="fu">as.character</span>(date), <span class="at">format =</span> <span class="st">"%Y%m%d"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> points)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>() <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_date</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="README_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="README_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
 
 </main>
 <!-- /main column -->

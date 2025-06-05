@@ -13,6 +13,9 @@ Focar em tres maneiras de entregar produtos de dados:
 - modelos de ML e scores
 - APIs
 
+---
+
+# Observacoes 
 
 Se sobrar tempo: um pouco sobre dashboard interativo
 
@@ -20,6 +23,9 @@ Se sobrar tempo: um pouco sobre dashboard interativo
 
 **PS2:** PPT e Excel ainda reinam. 
 
+**PS3:** Nao vou mostrar criacao de lib, mas vou falar um pouco pq eh interessante tambem.
+
+**PS4:** meu teclado nao tem acento
 
 ---
 
