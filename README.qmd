@@ -56,7 +56,8 @@ library(knitr)
 # DATABRICKS_TOKEN=<personal-access-token>
 # DATABRICKS_CLUSTER_ID=<cluster-id>
 
-# sc <- spark_connect(method = "databricks_connect")
+sc <- spark_connect(method = "databricks_connect")
+brickster::open_workspace()
 ```
 
 ola mundo
@@ -65,25 +66,25 @@ ola mundo
 #| echo: false
 #| warning: false
 
-# mtcars_from_local = mtcars |> rownames_to_column("car_id")
+mtcars_from_local = mtcars |> rownames_to_column("car_id")
 
-# mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
+mtcars_no_db <- copy_to(sc, mtcars_from_local, "mtcars_from_local", overwrite = TRUE)
 
-# spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
+spark_write_table(mtcars_no_db, name = "mtcars_from_local", mode = "overwrite")
 ```
 
 ## Dados da analise
 
 ```{r}
-# mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
-# mtcars_from_db <- tbl(sc, "mtcars_from_local")
-mtcars_from_db <- mtcars
-mtcars_from_db |> head() |> kable()
+mtcars_from_db <- sdf_sql(sc, "SELECT * FROM databricks_asn.default.mtcars_id")
+mtcars_from_db <- tbl(sc, "mtcars_from_local")
+mtcars_from_db |> head() 
 ```
 
 ```{r}
 # collect(mtcars_from_db)
 ```
+
 
 ## Grafico de disp vs mpg
 
@@ -92,7 +93,7 @@ Esta secao mostra um grafico de `disp` vs `mgp`.
 -   numero de linhas: `r nrow(mtcars_from_db)`
 
 ```{r}
-collect(mtcars_from_db) |> 
+mtcars_from_db |> 
     ggplot(aes(x = disp, y = mpg))  +
     geom_smooth(se = FALSE) +
     geom_point(aes(colour = as.character(gear)))
@@ -120,18 +121,11 @@ p <- lakers |>
 ggplotly(p)
 ```
 
-```{python}
-import sys
-
-print(f"Versão do Py: {sys.version}")
+```{r}
+brickster::open_workspace()
 ```
 
-```{python}
-2+2
-```
+```{r}
 
-
-```{python}
-r.iris
 ```
 
