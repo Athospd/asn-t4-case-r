@@ -202,6 +202,11 @@ vip(fitted_model)
 
 # COMMAND ----------
 
+# Variable Importance - Lista completa
+vi(fitted_model)
+
+# COMMAND ----------
+
 # Prepare the test data
 test_data_prep <- bake(
   prep(livedoteo_pipeline), 
@@ -215,30 +220,27 @@ fitted_model <- extract_fit_parsnip(livedoteo_rf_last_fit)
 # Generate SHAP values
 shap_rf <- fitted_model |> 
   kernelshap(
-    X = test_data_prep |> head(1000), 
+    X = test_data_prep |> head(100), 
     bg_X = test_data_prep |> head(5), 
     type = "prob"
   ) |> 
   shapviz()
 
 # Plot SHAP importance
-sv_importance(shap_rf, kind = "both", show_numbers = TRUE)
+shap_imp <- sv_importance(shap_rf, kind = "beeswarm", show_numbers = TRUE)
+shap_imp
 
 # COMMAND ----------
 
-fitted_model |> predict(livedoteo_df, type = "prob")
-livedoteo_rf_last_fit |> extract_workflow() |> predict(livedoteo_df, type = "prob")
-# AUC no tempo
-# Shap Values
-# Estabilidade features
+livedoteo_rf_wf <- extract_workflow(livedoteo_rf_last_fit) 
 
-# log images and artifacts
+predict(livedoteo_rf_wf, livedoteo_df, type = "prob")
 
 # COMMAND ----------
 
 crated_model <- carrier::crate(
   function(x) workflows:::predict.workflow(livedoteo_rf_model, x),
-  livedoteo_rf_model = extract_workflow(livedoteo_rf_last_fit)
+  livedoteo_rf_model = livedoteo_rf_wf
 )
 
 mlflow_log_model(
@@ -251,10 +253,6 @@ mlflow_log_model(
 # COMMAND ----------
 
 mlflow_end_run()
-
-# COMMAND ----------
-
-mlflow_get_registered_model("livedoteo_rf_model")
 
 # COMMAND ----------
 
@@ -271,17 +269,5 @@ print(predictions)
 
 # COMMAND ----------
 
-# MAGIC %python
-# MAGIC import mlflow
-# MAGIC
-# MAGIC # Load the model from the registry
-# MAGIC model_uri = "models:/livedoteo_rf_model/1"
-# MAGIC model = mlflow.pyfunc.load_model(model_uri)
-# MAGIC
-# MAGIC # Prepare input data as a pandas DataFrame
-# MAGIC import pandas as pd
-# MAGIC input_data = spark.table("ingestao").toPandas()
-# MAGIC
-# MAGIC # Run predictions
-# MAGIC predictions = model.predict(input_data)
-# MAGIC print(predictions)
+# AUC no tempo
+# Estabilidade das features
