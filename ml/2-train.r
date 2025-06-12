@@ -172,7 +172,7 @@ livedoteo_rf_preds |> head() |> display()
 # COMMAND ----------
 
 # Log no MLFlow
-run <- mlflow_start_run()
+# run <- mlflow_start_run()
 
 livedoteo_rf_last_fit_roc_auc_oos <- livedoteo_rf_last_fit |> collect_metrics(type = "wide") |> pull(roc_auc)
 
@@ -215,7 +215,7 @@ fitted_model <- extract_fit_parsnip(livedoteo_rf_last_fit)
 # Generate SHAP values
 shap_rf <- fitted_model |> 
   kernelshap(
-    X = test_data_prep |> head(100), 
+    X = test_data_prep |> head(1000), 
     bg_X = test_data_prep |> head(5), 
     type = "prob"
   ) |> 
@@ -223,10 +223,6 @@ shap_rf <- fitted_model |>
 
 # Plot SHAP importance
 sv_importance(shap_rf, kind = "both", show_numbers = TRUE)
-
-# COMMAND ----------
-
-mlflow_end_run()
 
 # COMMAND ----------
 
@@ -240,10 +236,6 @@ livedoteo_rf_last_fit |> extract_workflow() |> predict(livedoteo_df, type = "pro
 
 # COMMAND ----------
 
-install.packages("carrier")
-
-# COMMAND ----------
-
 crated_model <- carrier::crate(
   function(x) workflows:::predict.workflow(livedoteo_rf_model, x),
   livedoteo_rf_model = extract_workflow(livedoteo_rf_last_fit)
@@ -253,3 +245,7 @@ mlflow_log_model(
   crated_model,
   artifact_path = "model"
 )
+
+# COMMAND ----------
+
+mlflow_end_run()
