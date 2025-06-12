@@ -243,9 +243,45 @@ crated_model <- carrier::crate(
 
 mlflow_log_model(
   crated_model,
-  artifact_path = "model"
+  artifact_path = "model",
+  registered_model_name = "databricks_asn.default.livedoteo",
+  model_version = 1
 )
 
 # COMMAND ----------
 
 mlflow_end_run()
+
+# COMMAND ----------
+
+mlflow_get_registered_model("livedoteo_rf_model")
+
+# COMMAND ----------
+
+
+library(mlflow)
+
+# Load the model by name and version
+model_uri <- "models:/livedoteo_rf_model/1"
+model <- mlflow_load_model(model_uri)
+
+# Run batch predictions
+predictions <- predict(model, livedoteo_df)
+print(predictions)
+
+# COMMAND ----------
+
+# MAGIC %python
+# MAGIC import mlflow
+# MAGIC
+# MAGIC # Load the model from the registry
+# MAGIC model_uri = "models:/livedoteo_rf_model/1"
+# MAGIC model = mlflow.pyfunc.load_model(model_uri)
+# MAGIC
+# MAGIC # Prepare input data as a pandas DataFrame
+# MAGIC import pandas as pd
+# MAGIC input_data = spark.table("ingestao").toPandas()
+# MAGIC
+# MAGIC # Run predictions
+# MAGIC predictions = model.predict(input_data)
+# MAGIC print(predictions)
