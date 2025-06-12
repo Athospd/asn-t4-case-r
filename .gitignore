@@ -47,5 +47,5 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-
+logs/
 intro_files/
