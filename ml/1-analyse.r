@@ -1,5 +1,5 @@
 # Databricks notebook source
-install.packages(c("tidymodels", "plotly"))
+install.packages(c("plotly"))
 
 # COMMAND ----------
 
@@ -15,6 +15,10 @@ options(repr.plot.width=1000, repr.plot.height=500)
 source("scripts/parametros.R")
 
 spark <- spark_connect(method = "databricks")
+
+# COMMAND ----------
+
+FEATURES
 
 # COMMAND ----------
 
@@ -50,6 +54,7 @@ id = as.symbol("idCliente")
 vr = as.symbol("flagAtividade")
 data = as.symbol("dtRef")
 
+# Enriquecimento usando Feature Store (ou usando um left join)
 base_enriquecida = base |>
   select(data, id, vr, all_of(FEATURES))
 
